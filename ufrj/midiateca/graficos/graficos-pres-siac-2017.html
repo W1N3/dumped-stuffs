@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>Gráficos para a SIAc 2017</title>
+    <script src="./Chart.min.js"></script>
+    <script src="./Chart.bundle.min.js"></script>
+    <script src="./utils.js"></script>
+    <style>
+    canvas{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="width:100%;">
+        <canvas id="Conceitos no Total"></canvas>
+    </div>
+    <br>
+    <br>
+    <div style="width:100%;">
+        <canvas id="Conceitos por Período"></canvas>
+    </div>
+    <br>
+    <br>
+    <div style="width:100%;">
+        <canvas id="Quantidade de TFGs Recuperados"></canvas>
+    </div>
+    <br>
+    <br>
+    <div style="width:100%;">
+        <canvas id="Temas no Total"></canvas>
+    </div>
+    <br>
+    <br>
+    <div style="width:100%;">
+        <canvas id="Temas por Período"></canvas>
+    </div>
+    <br>
+    <br>
+    <script charset="utf-8">
+        function encode_utf8(s) {
+            return s;//unescape(encodeURIComponent(s));
+        }
+
+        function decode_utf8(s) {
+            return s;//decodeURIComponent(s);
+        }
+        function config_skeleton() {
+            return {
+                type: '',
+                data: {
+                    labels: [],
+                    datasets: [/*{
+                        label: "im",
+                        backgroundColor: "rgb(200,200,0)",
+                        borderColor: "rgb(0,200,0)",
+                        data: [325],
+                        fill: false,
+                    },{
+                        label: "ouy",
+                        backgroundColor: "rgb(0,200,200)",
+                        borderColor: "rgb(0,200,0)",
+                        data: [32],
+                        fill: false,
+                    }*/]
+                },
+                options: {
+                    responsive: true,
+                    title:{
+                        display:true,
+                        text:''
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    hover: {
+                        mode: 'nearest',
+                        intersect: true
+                    },
+                    scales: {
+                        xAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'x'
+                            }
+                        }],
+                        yAxes: [{
+                            display: true,
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'y'
+                            }
+                        }]
+                    }
+                }
+            };
+        }
+
+        var cor = [];
+        cor[0] = [  "rgb(0,50,0)",
+                    "rgb(50,100,50)",
+                    "rgb(100,150,100)",
+                    "rgb(150,200,150)",
+                    "rgb(200,255,200)"];
+        cor[1] = [  "rgb(20,129,204)",
+                    "rgb(61,116,153)",
+                    "rgb(0,255,223)",
+                    "rgb(255,94,64)",
+                    "rgb(204,23,20)"];
+        cor[2] = [  "rgb(255,123,25",
+                    "rgb(40,0,255",
+                    "rgb(27,204,20"];
+        cor[4] = [  "204,118,105",
+                    "33,77,153",
+                    "157,245,255",
+                    "255,230,220"];
+
+        var json = [];
+        json[0] = [{"conceito":"E","quantidade":324,"porcentagem":0.2232},{"conceito":"MB","quantidade":557,"porcentagem":0.386},{"conceito":"B","quantidade":351,"porcentagem":0.2445},{"conceito":"R","quantidade":126,"porcentagem":0.0879},{"conceito":"S","quantidade":31,"porcentagem":0.0213}];
+        json[1] = [{"periodo":"2008/1","conceito":"E","quantidade":20},{"periodo":"2008/1","conceito":"MB","quantidade":30},{"periodo":"2008/1","conceito":"R","quantidade":10},{"periodo":"2008/1","conceito":"B","quantidade":27},{"periodo":"2008/2","conceito":"S","quantidade":1},{"periodo":"2008/2","conceito":"B","quantidade":24},{"periodo":"2008/2","conceito":"R","quantidade":7},{"periodo":"2008/2","conceito":"E","quantidade":24},{"periodo":"2008/2","conceito":"MB","quantidade":41},{"periodo":"2009/1","conceito":"B","quantidade":20},{"periodo":"2009/1","conceito":"S","quantidade":1},{"periodo":"2009/1","conceito":"E","quantidade":22},{"periodo":"2009/1","conceito":"MB","quantidade":40},{"periodo":"2009/1","conceito":"R","quantidade":4},{"periodo":"2009/2","conceito":"B","quantidade":22},{"periodo":"2009/2","conceito":"R","quantidade":7},{"periodo":"2009/2","conceito":"MB","quantidade":30},{"periodo":"2009/2","conceito":"E","quantidade":21},{"periodo":"2010/1","conceito":"B","quantidade":11},{"periodo":"2010/1","conceito":"E","quantidade":8},{"periodo":"2010/1","conceito":"R","quantidade":5},{"periodo":"2010/1","conceito":"S","quantidade":3},{"periodo":"2010/1","conceito":"MB","quantidade":16},{"periodo":"2010/2","conceito":"S","quantidade":5},{"periodo":"2010/2","conceito":"E","quantidade":16},{"periodo":"2010/2","conceito":"B","quantidade":13},{"periodo":"2010/2","conceito":"R","quantidade":6},{"periodo":"2010/2","conceito":"MB","quantidade":21},{"periodo":"2011/1","conceito":"B","quantidade":9},{"periodo":"2011/1","conceito":"E","quantidade":14},{"periodo":"2011/1","conceito":"MB","quantidade":13},{"periodo":"2011/1","conceito":"S","quantidade":2},{"periodo":"2011/2","conceito":"R","quantidade":6},{"periodo":"2011/2","conceito":"B","quantidade":17},{"periodo":"2011/2","conceito":"E","quantidade":15},{"periodo":"2011/2","conceito":"MB","quantidade":27},{"periodo":"2012/1","conceito":"R","quantidade":7},{"periodo":"2012/1","conceito":"B","quantidade":14},{"periodo":"2012/1","conceito":"E","quantidade":11},{"periodo":"2012/1","conceito":"MB","quantidade":38},{"periodo":"2012/1","conceito":"S","quantidade":2},{"periodo":"2012/2","conceito":"E","quantidade":14},{"periodo":"2012/2","conceito":"S","quantidade":6},{"periodo":"2012/2","conceito":"R","quantidade":3},{"periodo":"2012/2","conceito":"B","quantidade":23},{"periodo":"2012/2","conceito":"MB","quantidade":29},{"periodo":"2013/1","conceito":"S","quantidade":3},{"periodo":"2013/1","conceito":"B","quantidade":21},{"periodo":"2013/1","conceito":"E","quantidade":8},{"periodo":"2013/1","conceito":"R","quantidade":4},{"periodo":"2013/1","conceito":"MB","quantidade":24},{"periodo":"2013/2","conceito":"MB","quantidade":28},{"periodo":"2013/2","conceito":"B","quantidade":30},{"periodo":"2013/2","conceito":"E","quantidade":17},{"periodo":"2013/2","conceito":"S","quantidade":3},{"periodo":"2013/2","conceito":"R","quantidade":6},{"periodo":"2014/1","conceito":"MB","quantidade":13},{"periodo":"2014/1","conceito":"S","quantidade":5},{"periodo":"2014/1","conceito":"R","quantidade":7},{"periodo":"2014/1","conceito":"B","quantidade":28},{"periodo":"2014/1","conceito":"E","quantidade":13},{"periodo":"2014/2","conceito":"MB","quantidade":33},{"periodo":"2014/2","conceito":"R","quantidade":9},{"periodo":"2014/2","conceito":"B","quantidade":24},{"periodo":"2014/2","conceito":"E","quantidade":21},{"periodo":"2015/1","conceito":"E","quantidade":17},{"periodo":"2015/1","conceito":"B","quantidade":11},{"periodo":"2015/1","conceito":"R","quantidade":9},{"periodo":"2015/1","conceito":"MB","quantidade":45},{"periodo":"2015/2","conceito":"B","quantidade":15},{"periodo":"2015/2","conceito":"MB","quantidade":32},{"periodo":"2015/2","conceito":"E","quantidade":18},{"periodo":"2015/2","conceito":"R","quantidade":11},{"periodo":"2016/1","conceito":"R","quantidade":10},{"periodo":"2016/1","conceito":"MB","quantidade":34},{"periodo":"2016/1","conceito":"E","quantidade":18},{"periodo":"2016/1","conceito":"B","quantidade":17},{"periodo":"2016/2","conceito":"R","quantidade":7},{"periodo":"2016/2","conceito":"E","quantidade":24},{"periodo":"2016/2","conceito":"B","quantidade":13},{"periodo":"2016/2","conceito":"MB","quantidade":25},{"periodo":"2017/1","conceito":"MB","quantidade":38},{"periodo":"2017/1","conceito":"B","quantidade":12},{"periodo":"2017/1","conceito":"E","quantidade":23},{"periodo":"2017/1","conceito":"R","quantidade":8}];
+        json[2] = [{"periodo":"2001/2","quantidade":1},{"periodo":"2003/1","quantidade":5},{"periodo":"2003/2","quantidade":5},{"periodo":"2004/1","quantidade":4},{"periodo":"2004/2","quantidade":6},{"periodo":"2005/1","quantidade":21},{"periodo":"2005/2","quantidade":30},{"periodo":"2006/1","quantidade":85},{"periodo":"2006/2","quantidade":113},{"periodo":"2007/1","quantidade":85},{"periodo":"2007/2","quantidade":94},{"periodo":"2008/1","quantidade":94},{"periodo":"2008/2","quantidade":92},{"periodo":"2009/1","quantidade":46},{"periodo":"2009/2","quantidade":3},{"periodo":"2010/1","quantidade":31},{"periodo":"2010/2","quantidade":51},{"periodo":"2011/1","quantidade":92},{"periodo":"2011/2","quantidade":113},{"periodo":"2012/1","quantidade":74},{"periodo":"2012/2","quantidade":36},{"periodo":"2013/1","quantidade":62},{"periodo":"2013/2","quantidade":86},{"periodo":"2014/1","quantidade":67},{"periodo":"2014/2","quantidade":87},{"periodo":"2015/1","quantidade":75},{"periodo":"2015/2","quantidade":78},{"periodo":"2016/1","quantidade":78},{"periodo":"2016/2","quantidade":85},{"periodo":"2017/1","quantidade":81}];
+        json[3] = '[{"Temas":"Anexos","Total":2},{"Temas":"Arquitetura","Total":1},{"Temas":"Comercial","Total":16},{"Temas":"Edificação","Total":94},{"Temas":"Educação","Total":38},{"Temas":"Entretenimento/Cultura","Total":67},{"Temas":"Escala Local","Total":21},{"Temas":"Esportes","Total":9},{"Temas":"Grande Escala","Total":4},{"Temas":"Habitação de interesse social","Total":24},{"Temas":"Habitação multifamiliar","Total":11},{"Temas":"Hotelaria","Total":29},{"Temas":"Infraestrutura","Total":1},{"Temas":"Institucional/Coorporativo","Total":14},{"Temas":"Interesse Social","Total":1},{"Temas":"Interiores","Total":2},{"Temas":"Investigação Experimental","Total":14},{"Temas":"Paisagismo","Total":12},{"Temas":"Parques/Praças","Total":3},{"Temas":"Patrimônio","Total":16},{"Temas":"Requalificação","Total":24},{"Temas":"Restauro","Total":3},{"Temas":"Revitalização","Total":5},{"Temas":"Revitalização da Paisagem","Total":6},{"Temas":"Saúde","Total":20},{"Temas":"Sistemas Construtivos","Total":1},{"Temas":"Sustentabilidade","Total":3},{"Temas":"Transporte","Total":26},{"Temas":"Urbanismo","Total":45}]';
+        json[4] = '[{"tema":"Anexos","periodo":"2015/1","quantidade":1},{"tema":"Anexos","periodo":"2015/2","quantidade":1},{"tema":"Arquitetura","periodo":"2015/1","quantidade":1},{"tema":"Comercial","periodo":"2013/1","quantidade":5},{"tema":"Comercial","periodo":"2013/2","quantidade":6},{"tema":"Comercial","periodo":"2014/1","quantidade":3},{"tema":"Comercial","periodo":"2014/2","quantidade":1},{"tema":"Comercial","periodo":"2015/1","quantidade":1},{"tema":"Edificação","periodo":"2013/1","quantidade":1},{"tema":"Edificação","periodo":"2013/2","quantidade":1},{"tema":"Edificação","periodo":"2014/1","quantidade":2},{"tema":"Edificação","periodo":"2014/2","quantidade":12},{"tema":"Edificação","periodo":"2015/1","quantidade":9},{"tema":"Edificação","periodo":"2015/2","quantidade":24},{"tema":"Edificação","periodo":"2016/1","quantidade":45},{"tema":"Educação","periodo":"2013/1","quantidade":6},{"tema":"Educação","periodo":"2013/2","quantidade":8},{"tema":"Educação","periodo":"2014/1","quantidade":5},{"tema":"Educação","periodo":"2014/2","quantidade":5},{"tema":"Educação","periodo":"2015/1","quantidade":10},{"tema":"Educação","periodo":"2015/2","quantidade":4},{"tema":"Entretenimento/Cultura","periodo":"2012/2","quantidade":1},{"tema":"Entretenimento/Cultura","periodo":"2013/1","quantidade":11},{"tema":"Entretenimento/Cultura","periodo":"2013/2","quantidade":15},{"tema":"Entretenimento/Cultura","periodo":"2014/1","quantidade":19},{"tema":"Entretenimento/Cultura","periodo":"2014/2","quantidade":9},{"tema":"Entretenimento/Cultura","periodo":"2015/1","quantidade":8},{"tema":"Entretenimento/Cultura","periodo":"2015/2","quantidade":2},{"tema":"Entretenimento/Cultura","periodo":"2016/2","quantidade":2},{"tema":"Escala Local","periodo":"2012/2","quantidade":13},{"tema":"Escala Local","periodo":"2013/1","quantidade":1},{"tema":"Escala Local","periodo":"2013/2","quantidade":3},{"tema":"Escala Local","periodo":"2014/1","quantidade":3},{"tema":"Escala Local","periodo":"2014/2","quantidade":1},{"tema":"Esportes","periodo":"2013/1","quantidade":3},{"tema":"Esportes","periodo":"2013/2","quantidade":2},{"tema":"Esportes","periodo":"2014/1","quantidade":1},{"tema":"Esportes","periodo":"2015/1","quantidade":3},{"tema":"Grande Escala","periodo":"2013/2","quantidade":3},{"tema":"Grande Escala","periodo":"2014/1","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2013/1","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2013/2","quantidade":7},{"tema":"Habitação de interesse social","periodo":"2014/1","quantidade":4},{"tema":"Habitação de interesse social","periodo":"2014/2","quantidade":3},{"tema":"Habitação de interesse social","periodo":"2015/1","quantidade":6},{"tema":"Habitação de interesse social","periodo":"2015/2","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2016/2","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2017/1","quantidade":1},{"tema":"Habitação multifamiliar","periodo":"2012/2","quantidade":1},{"tema":"Habitação multifamiliar","periodo":"2013/1","quantidade":1},{"tema":"Habitação multifamiliar","periodo":"2013/2","quantidade":3},{"tema":"Habitação multifamiliar","periodo":"2014/1","quantidade":3},{"tema":"Habitação multifamiliar","periodo":"2014/2","quantidade":1},{"tema":"Habitação multifamiliar","periodo":"2015/1","quantidade":2},{"tema":"Hotelaria","periodo":"2012/2","quantidade":1},{"tema":"Hotelaria","periodo":"2013/1","quantidade":7},{"tema":"Hotelaria","periodo":"2013/2","quantidade":8},{"tema":"Hotelaria","periodo":"2014/1","quantidade":5},{"tema":"Hotelaria","periodo":"2014/2","quantidade":2},{"tema":"Hotelaria","periodo":"2015/1","quantidade":4},{"tema":"Hotelaria","periodo":"2015/2","quantidade":1},{"tema":"Hotelaria","periodo":"2016/2","quantidade":1},{"tema":"Infraestrutura","periodo":"2014/2","quantidade":1},{"tema":"Institucional/Coorporativo","periodo":"2012/2","quantidade":7},{"tema":"Institucional/Coorporativo","periodo":"2013/1","quantidade":1},{"tema":"Institucional/Coorporativo","periodo":"2013/2","quantidade":3},{"tema":"Institucional/Coorporativo","periodo":"2014/2","quantidade":2},{"tema":"Institucional/Coorporativo","periodo":"2015/1","quantidade":1},{"tema":"Interesse Social","periodo":"2015/1","quantidade":1},{"tema":"Interiores","periodo":"2015/2","quantidade":2},{"tema":"Investigação Experimental","periodo":"2014/2","quantidade":2},{"tema":"Investigação Experimental","periodo":"2015/1","quantidade":1},{"tema":"Investigação Experimental","periodo":"2015/2","quantidade":8},{"tema":"Investigação Experimental","periodo":"2016/1","quantidade":3},{"tema":"Paisagismo","periodo":"2012/2","quantidade":2},{"tema":"Paisagismo","periodo":"2013/2","quantidade":1},{"tema":"Paisagismo","periodo":"2014/2","quantidade":3},{"tema":"Paisagismo","periodo":"2016/1","quantidade":6},{"tema":"Parques/Praças","periodo":"2013/2","quantidade":1},{"tema":"Parques/Praças","periodo":"2015/1","quantidade":2},{"tema":"Patrimônio","periodo":"2015/1","quantidade":3},{"tema":"Patrimônio","periodo":"2015/2","quantidade":10},{"tema":"Patrimônio","periodo":"2016/1","quantidade":3},{"tema":"Requalificação","periodo":"2013/1","quantidade":6},{"tema":"Requalificação","periodo":"2013/2","quantidade":2},{"tema":"Requalificação","periodo":"2014/1","quantidade":4},{"tema":"Requalificação","periodo":"2014/2","quantidade":2},{"tema":"Requalificação","periodo":"2015/1","quantidade":8},{"tema":"Requalificação","periodo":"2015/2","quantidade":2},{"tema":"Restauro","periodo":"2014/2","quantidade":1},{"tema":"Restauro","periodo":"2016/1","quantidade":2},{"tema":"Revitalização","periodo":"2013/1","quantidade":2},{"tema":"Revitalização","periodo":"2013/2","quantidade":1},{"tema":"Revitalização","periodo":"2014/2","quantidade":1},{"tema":"Revitalização","periodo":"2016/1","quantidade":1},{"tema":"Revitalização da Paisagem","periodo":"2014/2","quantidade":2},{"tema":"Revitalização da Paisagem","periodo":"2015/1","quantidade":4},{"tema":"Saúde","periodo":"2013/1","quantidade":4},{"tema":"Saúde","periodo":"2013/2","quantidade":5},{"tema":"Saúde","periodo":"2014/1","quantidade":4},{"tema":"Saúde","periodo":"2014/2","quantidade":2},{"tema":"Saúde","periodo":"2015/1","quantidade":4},{"tema":"Saúde","periodo":"2015/2","quantidade":1},{"tema":"Sistemas Construtivos","periodo":"2013/2","quantidade":1},{"tema":"Sustentabilidade","periodo":"2013/1","quantidade":1},{"tema":"Sustentabilidade","periodo":"2015/2","quantidade":1},{"tema":"Sustentabilidade","periodo":"2016/1","quantidade":1},{"tema":"Transporte","periodo":"2012/2","quantidade":2},{"tema":"Transporte","periodo":"2013/1","quantidade":2},{"tema":"Transporte","periodo":"2013/2","quantidade":6},{"tema":"Transporte","periodo":"2014/1","quantidade":6},{"tema":"Transporte","periodo":"2014/2","quantidade":2},{"tema":"Transporte","periodo":"2015/1","quantidade":4},{"tema":"Transporte","periodo":"2015/2","quantidade":2},{"tema":"Transporte","periodo":"2016/2","quantidade":2},{"tema":"Urbanismo","periodo":"2013/1","quantidade":3},{"tema":"Urbanismo","periodo":"2013/2","quantidade":1},{"tema":"Urbanismo","periodo":"2014/1","quantidade":1},{"tema":"Urbanismo","periodo":"2014/2","quantidade":5},{"tema":"Urbanismo","periodo":"2015/1","quantidade":4},{"tema":"Urbanismo","periodo":"2015/2","quantidade":17},{"tema":"Urbanismo","periodo":"2016/1","quantidade":14}]';
+        json[5] = '[{"tema":"Educação","periodo":"2013/1","quantidade":6},{"tema":"Educação","periodo":"2013/2","quantidade":8},{"tema":"Educação","periodo":"2014/1","quantidade":5},{"tema":"Educação","periodo":"2014/2","quantidade":5},{"tema":"Educação","periodo":"2015/1","quantidade":10},{"tema":"Educação","periodo":"2015/2","quantidade":4},{"tema":"Entretenimento/Cultura","periodo":"2012/2","quantidade":1},{"tema":"Entretenimento/Cultura","periodo":"2013/1","quantidade":11},{"tema":"Entretenimento/Cultura","periodo":"2013/2","quantidade":15},{"tema":"Entretenimento/Cultura","periodo":"2014/1","quantidade":19},{"tema":"Entretenimento/Cultura","periodo":"2014/2","quantidade":9},{"tema":"Entretenimento/Cultura","periodo":"2015/1","quantidade":8},{"tema":"Entretenimento/Cultura","periodo":"2015/2","quantidade":2},{"tema":"Entretenimento/Cultura","periodo":"2016/2","quantidade":2},{"tema":"Habitação de interesse social","periodo":"2013/1","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2013/2","quantidade":7},{"tema":"Habitação de interesse social","periodo":"2014/1","quantidade":4},{"tema":"Habitação de interesse social","periodo":"2014/2","quantidade":3},{"tema":"Habitação de interesse social","periodo":"2015/1","quantidade":6},{"tema":"Habitação de interesse social","periodo":"2015/2","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2016/2","quantidade":1},{"tema":"Habitação de interesse social","periodo":"2017/1","quantidade":1},{"tema":"Requalificação","periodo":"2013/1","quantidade":6},{"tema":"Requalificação","periodo":"2013/2","quantidade":2},{"tema":"Requalificação","periodo":"2014/1","quantidade":4},{"tema":"Requalificação","periodo":"2014/2","quantidade":2},{"tema":"Requalificação","periodo":"2015/1","quantidade":8},{"tema":"Requalificação","periodo":"2015/2","quantidade":2}]';
+        json[3] = JSON.parse(decode_utf8(json[3]));
+        json[4] = JSON.parse(decode_utf8(json[5]));
+        var config = [];
+        
+
+        for(i = 0 ; i < 5 ; i++)
+            config[i] = config_skeleton();
+
+        config[0].type = 'pie';
+        config[0].options = {responsive:true,title:{display:true,text:''}};
+        config[0].options.title.text = document.getElementsByTagName("canvas")[0].id;
+        config[0].data.datasets = [{data:[], backgroundColor:[], label:['']}];
+        config[0].data.labels = ["Excelente", "Muito Bom", "Bom", "Regular", "Suficiente"];
+        for(i = 0 ; i < json[0].length ; i++) {
+            config[0].data.datasets[0].data[i] = json[0][i].quantidade;
+            config[0].data.datasets[0].backgroundColor[i] = cor[0][i];
+        }
+
+        
+        config[1].type = 'line';
+        config[1].options.title.text = document.getElementsByTagName("canvas")[1].id;
+        config[1].options.scales.xAxes[0].scaleLabel.labelString ='';
+        config[1].options.scales.yAxes[0].scaleLabel.labelString ='';
+        
+        lbs = [];
+        for(i = 0 ; i < json[1].length ; i++) {
+            lbs[i] = json[1][i].periodo;
+        }
+        lbs = lbs.filter(function(elem,index,self) {return index == self.indexOf(elem);});
+        config[1].data.labels = lbs;
+
+        rds = [];
+        for(i = 0 ; i < json[1].length ; i++) {
+            rds[i] = json[1][i].conceito;
+        }
+        rds = rds.filter(function(elem,index,self) {return index == self.indexOf(elem);});
+        aux = rds[6];
+        rds[6] = rds[5];
+        rds[5] = aux;
+        ds = [];
+        for(i = 0 ; i < rds.length ; i++) {
+            if(rds[i] == "E") {
+                ds[i] = {key: rds[i], name:"Excelente"};
+            }
+            else if(rds[i] == "MB") {
+                ds[i] = {key: rds[i], name:"Muito Bom"};
+            }
+            else if(rds[i] == "B") {
+                ds[i] = {key: rds[i], name:"Bom"};
+            }
+            else if(rds[i] == "R") {
+                ds[i] = {key: rds[i], name:"Regular"};
+            }
+            else if(rds[i] == "S") {
+                ds[i] = {key: rds[i], name:"Suficiente"};
+            }
+        }
+
+        for(i = 0 ; i < ds.length ; i++) {
+            config[1].data.datasets[i] = {
+                    label: ds[i].name,
+                    backgroundColor: cor[1][i],
+                    borderColor: cor[1][i],
+                    data: [],
+                    fill: false,
+                };
+        }
+
+        for(i = 0 ; i < json[1].length; i++) {
+            config[1].data.datasets[rds.indexOf(json[1][i].conceito)].data[lbs.indexOf(json[1][i].periodo)] = json[1][i].quantidade;
+        }
+
+        /*
+        for(i = 0 ; i < ds.length; i++) {
+            for(j = 0 ; j < lbs.length; j++) {
+                if(config[1].data.datasets[i].data[j] == null) {
+                    config[1].data.datasets[i].data[j] = 0;
+                }
+            }
+        }
+        */  
+
+        config[2].type = 'line';
+        config[2].options.title.text = document.getElementsByTagName("canvas")[2].id;
+        config[2].options.scales.xAxes[0].scaleLabel.labelString = "Periodos";
+        config[2].options.scales.yAxes[0].scaleLabel.labelString = "TFGs";
+        config[2].data.datasets[0] = {label:'Quantidade', backgroundColor:cor[2][2]+",0.1)",borderColor:cor[2][2]+")", fill:true, data:[]};
+        config[2].data.datasets[1] = {label:'Media', backgroundColor:cor[2][1]+",0.1)",borderColor:cor[2][1]+")", fill:true, data:[]};
+        config[2].data.datasets[2] = {label:'Media Esperada', backgroundColor:cor[2][0]+",0.1)",borderColor:cor[2][0]+")", fill:true, data:[]};
+        sum = 0;
+        p = 0;
+        for(i = 0 ; i < json[2].length ; i++) {
+            config[2].data.labels[i] = json[2][i].periodo;
+            config[2].data.datasets[0].data[i] = json[2][i].quantidade;
+            sum += json[2][i].quantidade;
+            p++;
+        }
+        for(i = 0 ; i < json[2].length ; i++) {
+            config[2].data.datasets[1].data[i] = sum/p;
+            config[2].data.datasets[2].data[i] = 90;
+        }
+
+        config[3].type = 'bar';
+        config[3].options = {responsive : true, legend:{position:'top'},title:{display:true,text:document.getElementsByTagName("canvas")[3].id}};
+        config[3].data.labels[0] = "Total";
+
+        json[3] = json[3].sort(function(a,b){return b.Total-a.Total;});
+        for(i = 0 ; i < json[3].length ; i++) {
+            bc = ''+randomScalingFactor()+','+randomScalingFactor()+','+randomScalingFactor()+'';
+            config[3].data.datasets[i] = {
+                label:json[3][i].Temas,
+                backgroundColor:'rgb('+bc+',0.7)',
+                borderColor:'rgb('+bc+')',
+                fill:true,
+                data:[json[3][i].Total]
+            };
+        }
+        
+        config[4].type = 'line';
+        config[4].options.title.text = document.getElementsByTagName("canvas")[4].id;
+        config[4].options.scales.xAxes[0].scaleLabel.labelString ='';
+        config[4].options.scales.yAxes[0].scaleLabel.labelString ='';
+        
+        lbs = [];
+        for(i = 0 ; i < json[4].length ; i++) {
+            lbs[i] = json[4][i].periodo;
+        }
+        lbs = lbs.filter(function(elem,index,self) {return index == self.indexOf(elem);});
+        lbs = lbs.sort();
+        config[4].data.labels = lbs;
+
+        ds = [];
+        for(i = 0 ; i < json[4].length ; i++) {
+            ds[i] = json[4][i].tema;
+        }
+        ds = ds.filter(function(elem,index,self) {return index == self.indexOf(elem);});
+
+        for(i = 0 ; i < ds.length ; i++) {
+            bc = ''+randomScalingFactor()+','+randomScalingFactor()+','+randomScalingFactor()+'';
+            config[4].data.datasets[i] = {
+                    label: ds[i],
+                    backgroundColor: 'rgb('+cor[4][i]+',0.6)',
+                    borderColor: 'rgb('+cor[4][i]+')',
+                    data: [],
+                    fill: false,
+                };
+        }
+
+        for(i = 0 ; i < json[4].length; i++) {
+            config[4].data.datasets[ds.indexOf(json[4][i].tema)].data[lbs.indexOf(json[4][i].periodo)] = json[4][i].quantidade;
+        }
+
+        /*
+        for(i = 0 ; i < ds.length; i++) {
+            for(j = 0 ; j < lbs.length; j++) {
+                if(config[4].data.datasets[i].data[j] == null) {
+                    config[4].data.datasets[i].data[j] = 0;
+                }
+            }
+        }
+        */
+
+        window.onload = function() {
+            var actx = document.getElementsByTagName("canvas");
+            for(i = 0 ; i < actx.length ; i++) {
+                ctx = actx[i].getContext("2d");
+                window.myLine = new Chart(ctx, config[i]);
+            }
+        };
+
+        
+    </script>
+</body>
+
+</html>
