@@ -1,0 +1,45 @@
+Table of Contents for guide the Proof of Concept roadmap:
+00. Pros and Cons
+01. Syntax
+02. Basics I/O (CLI and GUI) 
+03. Arithmetics
+04. Conditionals
+05. Loops
+06. Structures/Classes
+07. Modularization
+08. Particularities
+09. System calls
+10. File I/O
+11. CLI Handling
+12. Sockets and Networking
+13. Concurrency and Parallelism
+14. GUI Handling
+15. Database Integration
+16. Frameworks and Librarys
+Extra. Classical problems
+
+Languages to explore:
+01. C
+02. C++
+03. C#
+04. Java
+05. PHP
+06. Python
+07. JavaScript
+08. Go
+09. Rust
+10. Haskel
+11. Lisp
+12. Perl
+13. Ruby
+14. Bash
+15. Lua
+16. Cobol
+17. Assembly 8 bits
+18. Assembly 16 bits
+19. Assembly 32 bits
+20. Assembly 64 bits
+21. TypeScript
+22. Ruby
+23. Shell
+
