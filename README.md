@@ -1,20 +1,23 @@
 
 # Intro
 
-Instead of having a lot of repos that represents different works, I decided to have only one repo with all types of works I have done in UFRJ and correlated.
+Instead of having a lot of repos that represents different works, I decided to have only one repo with all types of works I have done in UFRJ, life and correlated.
 
 # Contents
 
 * UFRJ
-... ..* BCC
-... ..* Projects and selective processes
+..* BCC
+..* Projects and selective processes
 * configs
-... ..* i3 Window Manager
-... ..* ...and more later
+..* i3 Window Manager
+..* ...and more later
 * scripts
 * proof-of-concepts
-... ..* Programming Languages roadmap
-... ..* 
-... ..* Project Euler
-... ..* Code Challenging
+..* Programming Languages roadmap
+..* Data Structures exploration
+..* Project Euler
+..* Code Challenging
+* Random
+..* NFC
+..* Css refactor
 
