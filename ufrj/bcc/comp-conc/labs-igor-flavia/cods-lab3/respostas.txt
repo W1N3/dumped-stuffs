@@ -1,0 +1,32 @@
+1.1:
+	0, 1 e 2 pela concorrencia das threads de acesso ao processamento das instruções pelo processador;
+
+	Não pois seria uma inconsistência da arquitetura do hardware, pois instruções realizadas pelo processador devem ser atômicos. Desta forma, a condição de corrida, apenas interfere na ordem de execução das instruções entre as threads;
+
+1.2:
+	Compilado, Executado e Observado;
+
+1.3:
+	Alterado;
+
+1.4:
+	Apresenta. É tolerável pois não se sabe o objetivo desta aplicação;
+
+2.1:
+	Esperado que o o valor final da variável 's' seja igual a 20 milhões;
+
+2.2:
+	Compilado, Executado e Observado;
+	
+2.3:
+	Não. Pois a disputa pelo acesso da variável 's', como está programada, gera inconsistência no incremento da variável. Isso acontece pelo fato de o trabalho de incrementar na variável não é atômico para a thread e por estar numa seção crítica do código, assim podendo embaralhar as instruções que realizam o incremento entre as threads no processamento;
+
+2.4:
+	Sim. Não é tolerável pois o valor é inconsistente e não bate com o esperado. É uma condição de corrida ruim;
+	
+3.1:
+	Compreendido;
+3.2:
+	Sim;
+3.3:
+	Alterado e continua a dar resultados consistentes;

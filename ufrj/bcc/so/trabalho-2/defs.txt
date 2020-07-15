@@ -1,0 +1,70 @@
+# checagem da correspondência da modelagem
+	# implementar o modo suspenso para os processos
+
+	# def create_process(next_pid):
+	# def check_arrival_time(c):
+	# (1) Criação do Processo (memória tem espaço)
+	#		- cria o PCB
+	#		- adiciona na fila de 'pronto'
+
+	# def create_process(next_pid):
+	# def check_arrival_time(c): - tem q ser modificada para funcionar o fluxo (2)
+	# (2) Criação do Processo (memória cheia)
+	#		- cria o PCB
+	#		- adiciona na fila de 'pronto/suspenso'
+
+	# def do_swap_in_ready():
+	# (3) Realocação de Prontos ('swap in')
+	#		- fila de 'prontos' vazia
+	#		- algum processo na fila de 'pronto/suspenso' com proridade maior que algum processo na fila de 'prontos'
+	#		- 'swap in'
+	#		- caso necessário, 'swap out'
+
+	# def do_swap_out_ready():
+	# (4) Realocação de Prontos ('swap out')
+	#		- memória e cheia e liberaria mais memória ao retirar o processo 'pronto' do que retirar o processo 'bloqueado' [não convêm com a premissa do WSL]
+	#		- suspende um processo de baixa-prioridade 'pronto' ao invés de um processo de alta-prioridade ' bloqueado'
+	#		- 'swap out'
+
+	# def schedule_next_process():
+	# (5) Escalonamento do Processo ('round-robin' 5 u.t. com 'feedback')
+	#		- escalonador seleciona um processo de uma das filas existentes
+	#		- coloca o processo para execução
+
+	# def unschedule_current_process(pid):
+	# (6) Escalonamento do Processo ('time-out' ou fim da execução)
+	#		- tira o processo da execução
+	#		- aloca na fila de baixa-prioridade
+
+	# def dispatch_process_io(pid):
+	# (7) Requisição de Recurso
+	#		- Pedido de IO (Disco, Impressora, Fita Magnética)
+	#		- 'page fault' - página não encontrada na memória
+	#		- tira o processo da execução
+	#		- realiza a rotina (5)
+
+	# def update_io_queue():
+	# (8) Atendimento do Recurso
+	#		- termina o IO
+	#		- página a ser utilizada foi carregada na memória
+
+	# def update_io_queue():
+	# (9) Atendimento do Recurso
+	#		- termina o IO
+	#		- página a ser utilizada foi carregada na memória
+
+	# def do_swap_in_blocked();
+	# (10) Realocação de Bloqueados ('swap in')
+	#		- processo na fila de alta-prioridade com estado 'bloqueado/suspenso'
+	#		- carrega o processo na memória e retira outro dado o LRU
+
+	# def do_swap_out_blocked():
+	# (11) Realocação de Bloqueados ('swap out')
+	#		- quando não existe processo 'pronto' na memória
+	#		- quando é o processo mais antigo dado o LRU
+	#		- tira o processo da memória e coloca outro dado o LRU
+
+	# def test_services_times(pid):
+	# (12) Fim do Processo
+	#		- termina o tempo total de execução do processo
+	#		- destroi o PCB
