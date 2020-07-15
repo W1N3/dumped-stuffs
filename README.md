@@ -6,18 +6,18 @@ Instead of having a lot of repos that represents different works, I decided to h
 # Contents
 
 * UFRJ
-..* BCC
-..* Projects and selective processes
+	* BCC
+	* Projects and selective processes
 * configs
-..* i3 Window Manager
-..* ...and more later
+	* i3 Window Manager
+	* and more later
 * scripts
 * proof-of-concepts
-..* Programming Languages roadmap
-..* Data Structures exploration
-..* Project Euler
-..* Code Challenging
+	* Programming Languages roadmap
+	* Data Structures exploration
+	* Project Euler
+	* Code Challenging
 * Random
-..* NFC
-..* Css refactor
+	* NFC
+	* Css refactor
 
