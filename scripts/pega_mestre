@@ -1,0 +1,5 @@
+#!/bin/bash
+
+read -s -p 'Que pasas hermano? ' PASS
+echo -n $PASS | md5sum | grep -Eoe '[[:alnum:]]*' | xclip -r -selection clipboard
+
