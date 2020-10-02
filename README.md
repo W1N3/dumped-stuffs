@@ -1,7 +1,7 @@
 
 # Intro
 
-Instead of having a lot of repos that represents different works, I decided to have only one repo with all types of works I have done in UFRJ, life and correlated.
+Instead of having a lot of repos that represents different workarounds and contraptions, I decided to have only one repo with all types of works I have done in UFRJ, life and correlated.
 
 # Contents
 
@@ -13,8 +13,8 @@ Instead of having a lot of repos that represents different works, I decided to h
 	* and more later
 * scripts
 * proof-of-concepts
-	* Programming Languages roadmap
-	* Data Structures exploration
+	* "Programming Languages roadmap"
+	* "Data Structures exploration"
 	* Project Euler
 	* Code Challenging
 * Random
